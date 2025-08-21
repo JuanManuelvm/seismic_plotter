@@ -1,4 +1,22 @@
 #!/bin/bash
+# 🧪 Verificar e instalar python3-venv si no está disponible
+if ! python3 -m venv --help > /dev/null 2>&1; then
+    echo "❌ 'python3-venv' no está instalado. Instalando..."
+    sudo apt-get update
+    sudo apt-get install -y python3-venv
+else
+    echo "✅ 'python3-venv' disponible."
+fi
+
+# 🧪 Verificar e instalar tkinter
+if ! python3 -c "import tkinter" 2>/dev/null; then
+    echo "❌ 'tkinter' no está disponible. Instalando..."
+    sudo apt-get update
+    sudo apt-get install -y python3-tk
+else
+    echo "✅ 'tkinter' disponible."
+fi
+
 if [ ! -d "$VENV_DIR" ]; then
 	python3 -m venv venv
 else
