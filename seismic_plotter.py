@@ -27,7 +27,21 @@ class SeismicPlotter:
                  window_seconds=150, refresh_rate_ms=500, data_timeout=30):
         
         self.stations = stations
-        self.stationxml_paths = stationxml_paths
+        """ self.stationxml_paths = {
+        "UIS09": "/net/sw/source/inventories/UIS09.xml",
+        "UIS05": "/net/sw/source/inventories/UIS05.xml",
+        "UIS03": "/net/sw/source/inventories/UIS03.xml",
+        "UIS01": "/net/sw/source/inventories/UIS01.xml",
+        "R8256": "/net/sw/source/inventories/R8256.xml"   
+        } """
+        """ self.stationxml_paths = stationxml_paths """
+        self.stationxml_paths = {
+        "UIS09": "/home/jumavamu/Documentos/PruebasSeiscom/UIS09.xml",
+        "UIS05": "/home/jumavamu/Documentos/PruebasSeiscom/UIS05.xml",
+        "UIS03": "/home/jumavamu/Documentos/PruebasSeiscom/UIS03.xml",
+        "UIS01": "/home/jumavamu/Documentos/PruebasSeiscom/UIS01.xml"   
+        }
+        print(self.stationxml_paths)
         self.seedlink_host = seedlink_host
         self.window_seconds = window_seconds
         self.refresh_rate_ms = refresh_rate_ms
@@ -113,13 +127,14 @@ class SeismicPlotter:
 
         for sta in {s[1] for s in self.stations}:
             path = self.stationxml_paths.get(sta)
-
+            print(path)
             if not path:
                 print(f"No se especificó ruta para {sta}")
                 continue
 
             # Si no existe, descargarlo
             if not os.path.exists(path):
+                print("entre")
                 try:
                     print(f"Descargando inventario de {sta} desde la web...")
                     url = f"{base_url}{sta}.xml"
