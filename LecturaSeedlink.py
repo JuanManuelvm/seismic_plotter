@@ -250,13 +250,7 @@ class SeedLinkMonitor:
             self.log_message(f"Iniciando graficador con {len(selected_stations)} estaciones")
         except ImportError:
             code = f"""# Configuración para el graficador
-    stations = [
-        {',\n    '.join([str(s) for s in selected_stations])}
-    ]
-
-    STATIONXML_PATHS = {{
-        {',\n    '.join([f'"{sta}": "{path}"' for sta, path in required_paths.items()])}
-    }}
+    
     """
             self.show_code_dialog(code)
             self.log_message("Módulo graficador no encontrado. Se mostró código para copiar manualmente")
