@@ -58,4 +58,6 @@ else
     echo "✅ 'slinktool' ya está disponible en el sistema."
 fi
 
+cd Servicios
 python3 main.py
+cd ..

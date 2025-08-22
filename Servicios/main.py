@@ -2,13 +2,12 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext
 from obspy.clients.seedlink.easyseedlink import EasySeedLinkClient
 from obspy import UTCDateTime
-import threading
-import subprocess
+import numpy as np
 from datetime import datetime, timedelta
 import urllib3
 
 # Importar el graficador
-from seismic_plotter import SeismicPlotter
+from tesis import principal
 from LecturaSeedlink import seleccionar_host
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -16,10 +15,13 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # ============================================================
 # Función de selección de host inicial
 # ============================================================
-def tipo_monitoreo():
-    def confirmar():
+def tipo_monitoreo(np):
+    def tiempoReal():
         root.destroy()
         seleccionar_host()
+    def analisis():
+        root.destroy()
+        principal(np)
 
     root = tk.Tk()
     root.title("Modos")
@@ -27,9 +29,9 @@ def tipo_monitoreo():
     root.resizable(False, False)
 
     ttk.Label(root, text="Ingrese el modo de graficar la información:").pack(pady=10)
-    ttk.Button(root, text="Tiempo real", command=confirmar).pack(pady=10)
-    ttk.Button(root, text="Analisis", command=confirmar).pack(pady=10)
+    ttk.Button(root, text="Tiempo real", command=tiempoReal).pack(pady=10)
+    ttk.Button(root, text="Analisis", command=analisis).pack(pady=10)
     root.mainloop()
 
 if __name__ == "__main__":
-    tipo_monitoreo()
+    tipo_monitoreo(np)
