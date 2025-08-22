@@ -58,4 +58,4 @@ else
     echo "✅ 'slinktool' ya está disponible en el sistema."
 fi
 
-python3 LecturaSeedlink.py
+python3 main.py
