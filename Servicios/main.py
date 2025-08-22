@@ -1,9 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, scrolledtext
-from obspy.clients.seedlink.easyseedlink import EasySeedLinkClient
-from obspy import UTCDateTime
 import numpy as np
-from datetime import datetime, timedelta
 import urllib3
 
 # Importar el graficador
@@ -13,15 +10,18 @@ from LecturaSeedlink import seleccionar_host
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ============================================================
-# Función de selección de host inicial
+# Función de selección de nicial
 # ============================================================
-def tipo_monitoreo(np):
+def tipo_monitoreo():
     def tiempoReal():
         root.destroy()
         seleccionar_host()
+        tipo_monitoreo()
+
     def analisis():
         root.destroy()
-        principal(np)
+        principal()
+        tipo_monitoreo()
 
     root = tk.Tk()
     root.title("Modos")
@@ -34,4 +34,4 @@ def tipo_monitoreo(np):
     root.mainloop()
 
 if __name__ == "__main__":
-    tipo_monitoreo(np)
+    tipo_monitoreo()
